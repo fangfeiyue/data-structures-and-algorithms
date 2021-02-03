@@ -1,0 +1,5 @@
+.DS_Store
+.ide
+build
+dist
+out
