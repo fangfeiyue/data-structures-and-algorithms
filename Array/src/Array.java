@@ -47,10 +47,72 @@ public class Array {
             throw new IllegalArgumentException("Add failed. Require index >= 0 and index <= size.");
 
         for (int i = size - 1; i >= index; i--)
-            data[i+1] = data[i];
+            data[i + 1] = data[i];
 
         data[index] = e;
         size++;
+    }
+
+    public int remove(int index) {
+        if (index < 0 || index >= size)
+            throw new IllegalArgumentException("Remove failed. Index is illegal.");
+
+        int res = data[index];
+        for (int i = index; i < size; i++)
+            data[i] = data[i + 1];
+
+        size--;
+        return res;
+    }
+
+    // 删除数组中的第一个元素
+    public int removeFirst() {
+        return remove(0);
+    }
+
+    // 删除数组中的最后一个元素
+    public void removeLast() {
+        remove(size - 1);
+    }
+
+    // 从数组中删除某个元素
+    public void removeEle(int e) {
+        int index = findIndex(e);
+
+        if (index != -1)
+            remove(index);
+    }
+
+    // 获取数组中指定位置的值
+    public int get(int index) {
+        if (index < 0 || index >= size)
+            throw new IllegalArgumentException("Get failed. Index is illegal.");
+
+        return data[index];
+    }
+
+    // 修改指定位置的值
+    public void set(int index, int e) {
+        if (index < 0 || index >= size)
+            throw new IllegalArgumentException("Set failed. Index is illegal.");
+
+        data[index] = e;
+    }
+
+    // 数组中是否包含某个元素
+    public boolean contains(int e) {
+        for (int i = 0; i < size; i++)
+            if (data[i] == e)
+                return true;
+        return false;
+    }
+
+    // 查找特定元素所在的索引
+    public int findIndex(int e) {
+        for (int i = 0; i < size; i++)
+            if (data[i] == e)
+                return i;
+        return -1;
     }
 
     @Override

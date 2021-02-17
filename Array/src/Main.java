@@ -1,19 +1,53 @@
 public class Main {
     public static void main(String[] args) {
-        int[] arr = new int[20];
-        for (int i = 0, len = arr.length; i < len; i++)
-            arr[i] = i;
+        Array arr = new Array(30);
 
-        int[] scores = new int[]{100, 99, 98};
-        for (int i = 0, len = scores.length; i < len; i++)
-            System.out.println(scores[i]);
+        for (int i = 0; i < 10; i++)
+            // 数组末尾依次添加
+            arr.addLast(i);
 
-        for (int score: scores)
-            System.out.println(score);
+        System.out.println(arr);
+        /*
+        输出
+        Array: size = 10, capacity = 30
+        [0,1,2,3,4,5,6,7,8,9]
+        */
 
-        scores[0] = 99;
+        // 向索引1的位置插入20
+        arr.add(1, 20);
+        System.out.println(arr);
+        /*
+        Array: size = 11, capacity = 30
+        [0,20,1,2,3,4,5,6,7,8,9]
+        */
 
-        for (int score: scores)
-            System.out.println(score);
+        arr.addFirst(-1);
+        System.out.println(arr);
+        /*
+        输出
+        Array: size = 12, capacity = 30
+        [-1,0,20,1,2,3,4,5,6,7,8,9]
+        */
+
+        arr.remove(2);
+        System.out.println(arr);
+        /*
+        Array: size = 11, capacity = 30
+        [-1,0,1,2,3,4,5,6,7,8,9]
+        */
+
+        arr.removeEle(-1);
+        System.out.println(arr);
+        /*
+        Array: size = 10, capacity = 30
+        [0,1,2,3,4,5,6,7,8,9]
+        */
+
+        arr.removeFirst();
+        System.out.println(arr);
+        /*
+        Array: size = 9, capacity = 30
+        [1,2,3,4,5,6,7,8,9]
+        */
     }
 }
