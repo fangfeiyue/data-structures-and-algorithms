@@ -1,6 +1,6 @@
 public class Main {
     public static void main(String[] args) {
-        Array arr = new Array(30);
+        Array<Integer> arr = new Array<Integer>(30);
 
         for (int i = 0; i < 10; i++)
             // 数组末尾依次添加

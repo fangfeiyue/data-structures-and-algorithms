@@ -1,11 +1,12 @@
-public class Array {
-    private int[] data;
+public class Array<E> {
+    private E[] data;
     // 存放数组中有多少个有效元素
     private int size;
 
     // 有参数的构造函数，用传入的capacity构造数组
     public Array(int capacity) {
-        data = new int[capacity];
+        //data = new E[capacity]; 不支持new一个泛型数组
+        data = (E[])new Object[capacity];
         size = 0;
     }
 
@@ -30,16 +31,16 @@ public class Array {
     }
 
     // 向数组末尾添加元素
-    public void addLast(int e) {
+    public void addLast(E e) {
         add(size, e);
     }
 
-    public void addFirst(int e) {
+    public void addFirst(E e) {
         add(0, e);
     }
 
     // 在指定位置插入特定元素
-    public void add(int index, int e) {
+    public void add(int index, E e) {
         if (size == data.length)
             throw new IllegalArgumentException("AddLast failed. Array is full.");
 
@@ -53,30 +54,31 @@ public class Array {
         size++;
     }
 
-    public int remove(int index) {
+    public E remove(int index) {
         if (index < 0 || index >= size)
             throw new IllegalArgumentException("Remove failed. Index is illegal.");
 
-        int res = data[index];
+        E res = data[index];
         for (int i = index; i < size; i++)
             data[i] = data[i + 1];
 
         size--;
+        data[size] = null;
         return res;
     }
 
     // 删除数组中的第一个元素
-    public int removeFirst() {
+    public E removeFirst() {
         return remove(0);
     }
 
     // 删除数组中的最后一个元素
-    public void removeLast() {
-        remove(size - 1);
+    public E removeLast() {
+        return remove(size - 1);
     }
 
     // 从数组中删除某个元素
-    public void removeEle(int e) {
+    public void removeEle(E e) {
         int index = findIndex(e);
 
         if (index != -1)
@@ -84,7 +86,7 @@ public class Array {
     }
 
     // 获取数组中指定位置的值
-    public int get(int index) {
+    public E get(int index) {
         if (index < 0 || index >= size)
             throw new IllegalArgumentException("Get failed. Index is illegal.");
 
@@ -92,7 +94,7 @@ public class Array {
     }
 
     // 修改指定位置的值
-    public void set(int index, int e) {
+    public void set(int index, E e) {
         if (index < 0 || index >= size)
             throw new IllegalArgumentException("Set failed. Index is illegal.");
 
@@ -100,17 +102,17 @@ public class Array {
     }
 
     // 数组中是否包含某个元素
-    public boolean contains(int e) {
+    public boolean contains(E e) {
         for (int i = 0; i < size; i++)
-            if (data[i] == e)
+            if (data[i].equals(e))
                 return true;
         return false;
     }
 
     // 查找特定元素所在的索引
-    public int findIndex(int e) {
+    public int findIndex(E e) {
         for (int i = 0; i < size; i++)
-            if (data[i] == e)
+            if (data[i].equals(e))
                 return i;
         return -1;
     }
