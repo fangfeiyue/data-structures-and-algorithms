@@ -1,3 +1,5 @@
+import java.util.List;
+
 /*
 反转一个单链表。
 
@@ -7,15 +9,24 @@
 输出: 5->4->3->2->1->NULL
 * */
 public class Solution {
+//    public ListNode reverseList(ListNode head) {
+//        ListNode pre = null;
+//        ListNode cur = head;
+//        while (cur != null) {
+//            ListNode next = cur.next;
+//            cur.next = pre;
+//            pre = cur;
+//            cur = next;
+//        }
+//        return pre;
+//    }
     public ListNode reverseList(ListNode head) {
-        ListNode pre = null;
-        ListNode cur = head;
-        while (cur != null) {
-            ListNode next = cur.next;
-            cur.next = pre;
-            pre = cur;
-            cur = next;
-        }
-        return pre;
+        if (head == null || head.next == null) return head;
+
+        ListNode node = reverseList(head.next);
+
+        head.next.next = head;
+        head.next = null;
+        return node;
     }
 }
